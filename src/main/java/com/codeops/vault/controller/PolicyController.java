@@ -36,7 +36,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/vault/policies")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
 @Tag(name = "Policies", description = "Access policy management")
 @Slf4j
 public class PolicyController {

@@ -84,6 +84,19 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(userId, null, authorities);
 
+            // Fall back to X-Team-Id header when the JWT does not carry a teamId claim
+            // (CodeOps-Server JWTs are team-agnostic; the client sends the header).
+            if (teamId == null) {
+                String teamHeader = request.getHeader("X-Team-Id");
+                if (teamHeader != null && !teamHeader.isBlank()) {
+                    try {
+                        teamId = UUID.fromString(teamHeader.trim());
+                    } catch (IllegalArgumentException ignored) {
+                        log.warn("Invalid X-Team-Id header: {}", teamHeader);
+                    }
+                }
+            }
+
             Map<String, Object> details = new HashMap<>();
             if (teamId != null) {
                 details.put("teamId", teamId);

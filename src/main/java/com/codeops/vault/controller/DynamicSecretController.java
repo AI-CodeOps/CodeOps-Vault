@@ -29,7 +29,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/vault/dynamic")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
 @Tag(name = "Dynamic Secrets", description = "Lease-based dynamic credential management")
 @Slf4j
 public class DynamicSecretController {

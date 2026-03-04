@@ -36,7 +36,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/vault/transit")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
 @Tag(name = "Transit", description = "Encryption-as-a-service with named keys")
 @Slf4j
 public class TransitController {

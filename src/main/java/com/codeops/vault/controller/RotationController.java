@@ -32,7 +32,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/vault/rotation")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
 @Tag(name = "Rotation", description = "Secret rotation management")
 @Slf4j
 public class RotationController {

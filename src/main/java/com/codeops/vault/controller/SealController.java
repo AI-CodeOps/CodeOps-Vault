@@ -48,7 +48,7 @@ public class SealController {
      * @return 200 with updated SealStatusResponse.
      */
     @PostMapping("/seal")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
     @Operation(summary = "Seal the Vault")
     public ResponseEntity<SealStatusResponse> seal() {
         sealService.seal();
@@ -62,7 +62,7 @@ public class SealController {
      * @return 200 with updated SealStatusResponse (may still be UNSEALING if more shares needed).
      */
     @PostMapping("/unseal")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
     @Operation(summary = "Submit a key share to unseal the Vault")
     public ResponseEntity<SealStatusResponse> unseal(@RequestBody SealActionRequest request) {
         return ResponseEntity.ok(sealService.submitKeyShare(request.keyShare()));
@@ -74,7 +74,7 @@ public class SealController {
      * @return 200 with shares array, total shares, and threshold.
      */
     @PostMapping("/generate-shares")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
     @Operation(summary = "Generate key shares for distribution")
     public ResponseEntity<Map<String, Object>> generateShares() {
         String[] shares = sealService.generateKeyShares();
@@ -94,7 +94,7 @@ public class SealController {
      * @return 200 with seal configuration map.
      */
     @GetMapping("/info")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
     @Operation(summary = "Get seal configuration info")
     public ResponseEntity<Map<String, Object>> getSealInfo() {
         return ResponseEntity.ok(sealService.getSealInfo());

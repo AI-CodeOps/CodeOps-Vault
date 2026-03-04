@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(AppConstants.VAULT_API_PREFIX + "/audit")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
 @RequiredArgsConstructor
 public class AuditController {
 

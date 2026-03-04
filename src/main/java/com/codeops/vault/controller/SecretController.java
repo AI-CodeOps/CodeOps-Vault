@@ -41,7 +41,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/vault/secrets")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
 @Tag(name = "Secrets", description = "Secret lifecycle management")
 @Slf4j
 public class SecretController {
