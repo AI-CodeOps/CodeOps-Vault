@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5436/codeops_vault
-    username: ${DB_USERNAME:codeops}
-    password: ${DB_PASSWORD:codeops}
+    url: jdbc:postgresql://localhost:5433/codeops_vault
+    username: ${DB_USERNAME:codeops_vault}
+    password: ${DB_PASSWORD:codeops_vault}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -13,6 +13,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     open-in-view: false
+  flyway:
+    enabled: false
   jackson:
     serialization:
       write-dates-as-timestamps: false
